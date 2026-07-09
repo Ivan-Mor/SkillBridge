@@ -1,19 +1,32 @@
 [project]
 name = "skillbridge"
 version = "0.1.0"
-description = "Skill exchange platform"
+description = "SkillBridge — platform for knowledge and skill exchange"
+readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "django>=6.0.7",
+    "django>=5.0",
+    "psycopg[binary]>=3.2",
+    "redis>=5.0",
+    "django-environ>=0.11",
+    "pillow>=10.0",
+    "gunicorn>=22.0",
+    "whitenoise>=6.0",
 ]
 
-[tool.black]
-line-length = 88
-target-version = ["py313"]
+[dependency-groups]
+dev = [
+    "ruff>=0.6.0",
+    "pytest>=8.0",
+    "pytest-django>=4.8",
+    "pre-commit>=3.7",
+    "coverage>=7.6",
+]
 
 [tool.ruff]
-line-length = 88
 target-version = "py313"
+line-length = 88
+src = ["apps", "config"]
 
 [tool.ruff.lint]
 select = [
@@ -22,27 +35,24 @@ select = [
     "I",
     "UP",
     "B",
-    "SIM",
-    "C4",
-    "DJ"
+    "DJ",
+]
+ignore = [
+    "DJ001",
 ]
 
-ignore = [
-]
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "config.settings"
-python_files = [
-    "test_*.py",
-    "*_test.py"
-]
+DJANGO_SETTINGS_MODULE = "config.settings.local"
+python_files = ["test_*.py", "*_test.py", "tests.py"]
+addopts = "-ra --strict-markers --strict-config"
+testpaths = ["apps"]
 
-[dependency-groups]
-dev = [
-    "black>=26.5.1",
-    "coverage>=7.15.0",
-    "pre-commit>=4.6.0",
-    "pytest>=9.1.1",
-    "pytest-django>=4.12.0",
-    "ruff>=0.15.20",
+[tool.ruff.lint.per-file-ignores]
+"config/settings.py" = [
+    "E501",
 ]
