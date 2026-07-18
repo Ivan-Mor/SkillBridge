@@ -30,7 +30,7 @@ if str(APPS_DIR) not in sys.path:
 
 SECRET_KEY = env.str("SECRET_KEY", default="django-insecure-dev-only-key")
 DEBUG = env.bool("DEBUG", default=False)
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["localhost", "127.0.0.1"])
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["localhost", "127.0.0.1"]) # type: ignore #typeignore
 
 
 # Application definition
@@ -133,7 +133,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": env.db_url(
         "DATABASE_URL",
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",  # type: ignore
     )
 }
 
