@@ -51,6 +51,9 @@ INSTALLED_APPS = [
     "skills",
 ]
 
+# Кастомная модель пользователя. Менять нельзя после первой миграции.
+AUTH_USER_MODEL = "accounts.User"
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",

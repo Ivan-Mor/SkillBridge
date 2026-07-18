@@ -16,7 +16,9 @@ RUN groupadd --gid 1000 app \
 COPY --from=ghcr.io/astral-sh/uv:0.11.16 /uv /bin/uv
 
 COPY pyproject.toml uv.lock ./
-RUN uv sync --frozen --no-dev
+# --dev: ставим dev-зависимости (pytest, ruff) для dev-контейнера.
+# Для prod-сборки нужен отдельный Dockerfile.prod или multi-stage build.
+RUN uv sync --frozen --dev
 
 COPY . .
 
