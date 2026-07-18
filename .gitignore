@@ -14,3 +14,7 @@ staticfiles/
 .idea/
 .vscode/
 .DS_Store
+
+skillbridge_memory/
+local_settings.py
+.obsidian/

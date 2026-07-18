@@ -1,0 +1,43 @@
+# Git
+.git
+.gitignore
+.github
+
+# Python
+.venv
+__pycache__
+*.py[cod]
+.pytest_cache
+.ruff_cache
+.coverage
+htmlcov
+
+# Локальные секреты — НИКОГДА не должны попасть в образ.
+# ВНИМАНИЕ: config/local_settings.py НЕ исключать — там только логика чтения
+# env-переменных, сами секреты лежат в .env (см. выше).
+.env
+.env.*
+!.env.example
+
+# Django
+*.sqlite3
+media
+staticfiles
+
+# IDE / OS / editor
+.idea
+.vscode
+.obsidian
+.DS_Store
+
+# Документация и память проекта — не нужны в рантайме
+docs
+skillbridge_memory
+README.md
+Makefile
+"Добро пожаловать.md"
+
+# Docker
+Dockerfile
+docker-compose*.yml
+.dockerignore

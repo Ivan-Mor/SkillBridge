@@ -10,10 +10,17 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import sys
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Делаем каталог apps/ импортируемым, чтобы приложения подключались в
+# INSTALLED_APPS как "accounts", а не "apps.accounts".
+APPS_DIR = BASE_DIR / "apps"
+if str(APPS_DIR) not in sys.path:
+    sys.path.insert(0, str(APPS_DIR))
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,6 +44,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "accounts",
+    "common",
+    "profiles",
+    "reviews",
+    "skills",
 ]
 
 MIDDLEWARE = [
@@ -72,6 +84,9 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+# Базовый безопасный дефолт (sqlite). Реальная БД переопределяется
+# в local_settings.py через django-environ. Если в окружении нет
+# local_settings — упадём в sqlite, а не в чужой Postgres.
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -115,3 +130,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "static/"
+
+
+try:
+    from .local_settings import *  # noqa: F401,F403
+except ImportError:
+    pass
