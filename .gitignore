@@ -16,5 +16,6 @@ staticfiles/
 .DS_Store
 
 skillbridge_memory/
-local_settings.py
 .obsidian/
+
+.pr_body.md

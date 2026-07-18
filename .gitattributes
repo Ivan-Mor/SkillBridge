@@ -1,0 +1,12 @@
+# Автонормализация переносов строк: в репозитории всегда LF,
+# на Windows при checkout'е конвертируется в CRLF автоматически.
+* text=auto eol=lf
+
+# Бинарные файлы — не трогать
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary
+*.woff binary
+*.woff2 binary

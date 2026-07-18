@@ -30,6 +30,10 @@ dev = [
 target-version = "py313"
 line-length = 88
 src = ["apps", "config"]
+extend-exclude = [
+    "*/migrations/*",
+    "*/tests/*",
+]
 
 [tool.ruff.lint]
 select = [
@@ -59,4 +63,10 @@ testpaths = ["apps"]
 "config/settings.py" = [
     "E501",
 ]
-
+# Миграции автогенерируются Django — не линтим и не форматируем.
+"*/migrations/*" = [
+    "E501",
+]
+"tests.py" = [
+    "S101",  # pytest.mark.usefixtures в тестах ок
+]
