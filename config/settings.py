@@ -7,6 +7,7 @@ Django settings for SkillBridge.
 """
 
 import sys
+from datetime import timedelta
 from pathlib import Path
 
 import environ
@@ -84,10 +85,10 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": ("rest_framework.pagination.PageNumberPagination"),
     "PAGE_SIZE": 20,
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.AllowAny",
+        "rest_framework.permissions.IsAuthenticated",
     ],
     "DEFAULT_THROTTLE_CLASSES": [
         "rest_framework.throttling.AnonRateThrottle",
@@ -98,6 +99,21 @@ REST_FRAMEWORK = {
         "user": "1000/day",
     },
 }
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(
+        minutes=env.int("ACCESS_TOKEN_LIFETIME_MIN", default=15)
+    ),
+    "REFRESH_TOKEN_LIFETIME": timedelta(
+        days=env.int("REFRESH_TOKEN_LIFETIME_DAYS", default=7)
+    ),
+    "ROTATE_REFRESH_TOKENS": False,
+    "BLACKLIST_AFTER_ROTATION": False,  # свой blacklist в Redis в 1.3.3
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    "USER_ID_FIELD": "id",
+    "USER_ID_CLAIM": "user_id",
+}
+
 CORS_ALLOW_ALL_ORIGINS = True
 
 
