@@ -30,7 +30,7 @@ if str(APPS_DIR) not in sys.path:
 
 SECRET_KEY = env.str("SECRET_KEY", default="django-insecure-dev-only-key")
 DEBUG = env.bool("DEBUG", default=False)
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["localhost", "127.0.0.1"])
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS") or ["localhost", "127.0.0.1"]
 
 
 # Application definition
