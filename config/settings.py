@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "django_filters",
     "corsheaders",
+    "storages",
 ]
 
 # Кастомная модель пользователя. Менять нельзя после первой миграции.
