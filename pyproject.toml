@@ -31,23 +31,11 @@ dev = [
 target-version = "py313"
 line-length = 88
 src = ["apps", "config"]
-extend-exclude = [
-    "*/migrations/*",
-    "*/tests/*",
-]
+extend-exclude = ["*/migrations/*", "*/tests/*"]
 
 [tool.ruff.lint]
-select = [
-    "E",
-    "F",
-    "I",
-    "UP",
-    "B",
-    "DJ",
-]
-ignore = [
-    "DJ001",
-]
+select = ["E", "F", "I", "UP", "B", "DJ"]
+ignore = ["DJ001"]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -61,13 +49,9 @@ addopts = "-ra --strict-markers --strict-config"
 testpaths = ["apps"]
 
 [tool.ruff.lint.per-file-ignores]
-"config/settings.py" = [
-    "E501",
-]
+"config/settings.py" = ["E501"]
 # Миграции автогенерируются Django — не линтим и не форматируем.
-"*/migrations/*" = [
-    "E501",
-]
+"*/migrations/*" = ["E501"]
 "tests.py" = [
-    "S101",  # pytest.mark.usefixtures в тестах ок
+    "S101", # pytest.mark.usefixtures в тестах ок
 ]
